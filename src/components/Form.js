@@ -1,7 +1,6 @@
 import classes from "./Form.module.css";
 import Card from "./ui/Card";
 import { useState } from "react";
-import Tasks from "./Tasks";
 
 const Form = () => {
   const [task, setTask] = useState("");
@@ -26,14 +25,11 @@ const Form = () => {
   return (
     <div>
       <Card>
-        <p>{message}</p> 
+        <p>{message}</p>
         <form className={classes.form} onSubmit={submitHandler}>
           <input type="text" value={task} onChange={taskChangeHandler} />
           <button>Submit</button>
         </form>
-      </Card>
-      <Card className={classes.card}>
-        <Tasks task={task} />
       </Card>
     </div>
   );

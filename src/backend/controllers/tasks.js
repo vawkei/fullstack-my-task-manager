@@ -4,7 +4,10 @@ const data = require("../data/Data");
 const getAllTasks = async (req, res) => {
   try {
     const task = await Task.find();
-    res.status(200).json({ task });
+    res.status(200)
+    // .setHeaders({})
+    .json({ task });
+    
   } catch (error) {
     res.status(500).json({ success: "failed", msg: error });
   }

@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
 
 require("dotenv").config();
@@ -9,7 +10,7 @@ const createTask = require("./src/backend/routes/tasks");
 const updateTask = require("./src/backend/routes/tasks");
 const deleteTask = require("./src/backend/routes/tasks");
 
-
+app.use(cors());
 app.use(express.json());
 
 //get all tasks
