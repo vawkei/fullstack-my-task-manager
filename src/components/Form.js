@@ -3,23 +3,37 @@ import Card from "./ui/Card";
 import { useState } from "react";
 
 const Form = () => {
-  const [task, setTask] = useState("");
+  const [enteredTask, setEnteredTask] = useState("");
   const [message, setMessage] = useState("");
 
   const taskChangeHandler = (e) => {
-    setTask(e.target.value);
+    setEnteredTask(e.target.value);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
 
-    if (task.trim().length === 0) {
+    if (enteredTask.trim().length === 0) {
       setMessage("Task can't be EMPTY");
       return;
     }
 
-    console.log(task);
-    setTask("");
+    setEnteredTask("");
+    console.log(enteredTask);
+
+    try {
+      const response = await fetch("http://localhost:8000/api/tasks", {
+        method: "POST",
+        body: JSON.stringify({task:enteredTask}),
+        headers: { "Content-Type": "application/json" },
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+      return await response.json();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -27,7 +41,7 @@ const Form = () => {
       <Card>
         <p>{message}</p>
         <form className={classes.form} onSubmit={submitHandler}>
-          <input type="text" value={task} onChange={taskChangeHandler} />
+          <input type="text" value={enteredTask} onChange={taskChangeHandler} />
           <button>Submit</button>
         </form>
       </Card>
