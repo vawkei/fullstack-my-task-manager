@@ -1,7 +1,12 @@
+import { useParams } from "react-router-dom";
 import classes from "./EditTask.module.css";
 import Card from "./ui/Card";
 
 const EditTask = () => {
+
+  const { id } = useParams();
+  console.log(id)
+
   return (
     <Card className={classes.card}>
       <h2>Edit Task</h2>
@@ -13,6 +18,10 @@ const EditTask = () => {
         <div className={classes.control}>
           <label htmlFor="">Task</label>
           <input type="text" />
+        </div>
+        <div className={classes.control}>
+          <label htmlFor="">Completed</label>
+          <input type="checkbox" />
         </div>
         <div className={classes.action}>
           <button>Edit</button>

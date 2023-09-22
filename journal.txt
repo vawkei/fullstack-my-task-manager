@@ -1,2 +1,33 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
+
+
+difference between :
+
+for (const taskKey in arrayedData) {
+  loadedTask.push({ id: taskKey, task: arrayedData[taskKey].task });
+}
+In this approach, you are using a for...in loop to iterate over the keys (taskKey) of the arrayedData object.
+You assume that the keys in arrayedData represent the id values for your tasks, and you use these keys directly as id properties in your loadedTask objects.
+This approach is suitable if the keys in arrayedData are meant to be used as task identifiers, but it assumes that these keys are valid and unique.
+MYOBSERVATION: for ...in loop: creates its own key numbers for you, like 1,2,3,4.they serve as your id
+
+for (const taskData of arrayedData) {
+  loadedTask.push({ _id: taskData._id, task: taskData.task });
+}
+In this way, we directly look at each task on the list and ask, "Do you have an ID?" If the task says yes and shows us its ID (like showing an ID card), we use that ID as the task's ID. We assume that each task has a special ID card, and we take it and call it "_id."
+
+In this approach, you are using a for...of loop to iterate over the elements (taskData) of the arrayedData array.
+You assume that each taskData object in the array has an _id property, which is a valid MongoDB ObjectId, and you use this _id property as the id property in your loadedTask objects.
+This approach is suitable if your arrayedData contains objects with _id properties that represent task identifiers.
+The main difference between these approaches is the type of data structure you are iterating over and how you extract the id values.
+
+The first approach is for iterating over the keys of an object (like a dictionary), where keys are used as task identifiers.
+The second approach is for iterating over an array of objects, where each object contains an _id property that serves as the task identifier.
+You should choose the approach that matches the structure of your data and how task identifiers are represented in your server's response. If your server returns an array of objects with _id properties, the second approach is more appropriate for extracting task IDs.
+MYOBSERVATION: for ...of loop: This doesnt tamper with your id, it leaves it as it is and uses it as the real id, it doesnt convert em to 1,2,3,4.
+
+
+
+
+
