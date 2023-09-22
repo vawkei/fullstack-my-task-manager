@@ -2,7 +2,7 @@ import classes from "./Form.module.css";
 import Card from "./ui/Card";
 import { useState } from "react";
 
-const Form = () => {
+const Form = (props) => {
   const [enteredTask, setEnteredTask] = useState("");
   const [message, setMessage] = useState("");
 
@@ -30,11 +30,16 @@ const Form = () => {
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      return await response.json();
+      //return await response.json();
+
+    props.onFetch()
+
     } catch (error) {
       console.log(error);
     }
   };
+
+
 
   return (
     <div>
