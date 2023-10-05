@@ -20,7 +20,9 @@ form .control{
 }
 .control label{
     font-size: 1rem;
+    
 }
+
 .control input{
     margin: 0.2rem;
     width: 20rem;
@@ -36,4 +38,5 @@ form .control{
     color: white;
     border-radius: 6px;
     background-color: blue;
+    cursor: pointer;
 }
