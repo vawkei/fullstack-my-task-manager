@@ -42,26 +42,23 @@ const Tasks = (props) => {
           <ul>
             {tasks.map((task) => {
               return (
-                <>
+                <div key={task._id}>
                   {!hiddenTasks.includes(task._id) ? (
-                    <div key={task._id}>
-                      <Card className={classes.card}>
-                        <li>{task.task}</li>
-                        <div className={classes.icons}>
-                          <Link
-                            to={`/${task._id}`}>
-                            <div>
-                              <AiFillEdit />
-                            </div>
-                          </Link>
-                          <BsTrash onClick={() => deleteTask(task._id)} />
-                        </div>
-                      </Card>
-                    </div>
+                    <Card className={classes.card}>
+                      <li>{task.task}</li>
+                      <div className={classes.icons}>
+                        <Link to={`/${task._id}`}>
+                          <div>
+                            <AiFillEdit />
+                          </div>
+                        </Link>
+                        <BsTrash onClick={() => deleteTask(task._id)} />
+                      </div>
+                    </Card>
                   ) : (
                     ""
                   )}
-                </>
+                </div>
               );
             })}
           </ul>

@@ -23,16 +23,16 @@ app.use(express.json());
 app.use("/api/tasks/",getAllTasks );
 
 //get single task:
-app.get("/api/tasks/:id",getSingleTask);
+app.use("/api/tasks/:id",getSingleTask);
 
 // create task {post}:
-app.post("/api/tasks",createTask);
+app.use("/api/tasks",createTask);
 
 //update task:
-app.put("/api/tasks/:id",updateTask);
+app.use("/api/tasks/:id",updateTask);
 
 //delete task:
-app.delete("/api/tasks/:id",deleteTask)
+app.use("/api/tasks/:id",deleteTask)
 
 const start =async ()=>{
   try{

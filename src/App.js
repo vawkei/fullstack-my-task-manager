@@ -25,7 +25,7 @@ function App() {
         throw new Error("Something Went wrong");
       }
       const data = await response.json();
-      console.log(data.task);
+      //console.log(data.task);
 
       const arrayedData = data.task;
       const loadedTask = [];
@@ -39,6 +39,7 @@ function App() {
       }
 
       setTasks(loadedTask);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
       setIsLoading(false);
@@ -49,7 +50,7 @@ function App() {
   //   setTasks((previousTasks)=>{
   //     return[...previousTasks,task]
   //   })
-  //  };
+  //  };not needed, since i am passing the fetchTask() function to the Task component
 
   return (
     <div>
@@ -58,13 +59,13 @@ function App() {
           path="/"
           element={
             <div>
-              <Form onFetch={fetchTasks} />
+              <Form onFetch={fetchTasks}  />
               <Tasks isLoading={isLoading} tasks={tasks} />
             </div>
           }
         />
 
-        <Route path="/:id" element={<EditTask />} />
+        <Route path="/:id" element={<EditTask onFetch={fetchTasks} tasks={tasks}/>} />
       </Routes>
     </div>
   );

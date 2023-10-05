@@ -5,10 +5,13 @@ import { useState } from "react";
 const Form = (props) => {
   const [enteredTask, setEnteredTask] = useState("");
   const [message, setMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const taskChangeHandler = (e) => {
     setEnteredTask(e.target.value);
   };
+
+  
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -17,7 +20,7 @@ const Form = (props) => {
       setMessage("Task can't be EMPTY");
       return;
     }
-
+    setIsLoading(true);
     setEnteredTask("");
     console.log(enteredTask);
 
@@ -31,11 +34,12 @@ const Form = (props) => {
         throw new Error("Something went wrong");
       }
       //return await response.json();
-
+    setIsLoading(false)
     props.onFetch()
 
     } catch (error) {
       console.log(error);
+      setIsLoading(false)
     }
   };
 
@@ -49,6 +53,7 @@ const Form = (props) => {
           <input type="text" value={enteredTask} onChange={taskChangeHandler} />
           <button>Submit</button>
         </form>
+        {isLoading && <p>Loading...</p>}
       </Card>
     </div>
   );

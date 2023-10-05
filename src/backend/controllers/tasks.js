@@ -6,11 +6,7 @@ const getAllTasks = async (req, res) => {
     const task = await Task.find().sort({ _id: -1 })
     res.status(200)
     .json({ task });
-    // let meetups =  await document.find({}, {_id:1}).toArray(); 
-    // .find()
-    //     .sort({ _id: -1 })
-    //     .toArray();
-    //     res.status(201).json({ message: "Comments retrieved", comments: document });
+    
   } catch (error) {
     res.status(500).json({ success: "failed", msg: error });
   }
